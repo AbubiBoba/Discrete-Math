@@ -1,2 +1,2 @@
 # Discrete-Math
-Repository for storing scripts for ITMO Discrete Math course
+Repository for storing scripts & homeworks for ITMO Discrete Math course
