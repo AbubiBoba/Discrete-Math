@@ -23,22 +23,21 @@ def slice_hash(hash_to_slice: str, length_of_part: int) -> list:
         slices.append(hash_to_slice[length_of_part * (i - 1): length_of_part * i])
     return slices
 
-def print_Function(result: str):
+def print_function(result: str):
     arity = math.ceil(math.log2(len(result)))
     alphabet = []
     for i in range(ord('a'), ord('z') + 1):
         alphabet.append(chr(i))
 
     for l in range(0, arity):
-        print(alphabet[l], end=" | ")
-    print("F")
-    print((4 * arity + 1) * '-')
+        print("|", alphabet[l], end=" ")
+    print("| F |")
+    print((arity + 1) * "|---" + "|")
     for bits in range(0, pow(2, arity)):
         b = ('0' * (arity - len(bin(bits)[2:]))) + bin(bits)[2:]
         for i in b:
-            print(i, end=" | ")
-        print(result[bits])
-        print((4 * arity + 1) * '-')
+            print("|", i, end=" ")
+        print("|", result[bits], "|")
 
 def main():
     s = "DM Fall 2023 HW3"
@@ -67,9 +66,11 @@ def main():
     w = ('0' * (32 - len(bin(w)[2:]))) + bin(w)[2:]
     print("0x24d03294 XOR ri")
     print(w)
+    print("Function number (0 -> 1):", int(w, 2))
+    print("Function number (1 -> 0):", int(w[::-1], 2))
     print("")
 
-    print_Function(w)
+    print_function(w)
 
 if __name__ == "__main__":
     main()
