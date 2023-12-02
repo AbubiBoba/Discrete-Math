@@ -27,11 +27,41 @@ def print_nth_function(arity: int, n: int):
     print_function(bin_f)
 
 
+def invert(s: str) -> str:
+    s = s.replace("\\land", "###")
+    s = s.replace("\\lor", "\\land")
+    s = s.replace("###", "\\lor")
+    alphabet = []
+    for i in range(ord('A'), ord('Z') + 1):
+        alphabet.append(chr(i))
+    for letter in alphabet:
+        s = s.replace("\\overline{" + letter + "}", '#')
+        s = s.replace(letter, "\\overline{" + letter + "}")
+        s = s.replace('#', letter)
+    return s
+
+
 def main():
-    arity = int(input("Input function arity: "))
-    n = int(input("Input function number (0 -> 1): "))
-    print(f"({arity})F_{n}")
-    print_nth_function(arity, n)
+    print("'n' if you want to work with nth function")
+    print("'v' to work with function vector")
+    print("'xor' to xor")
+    print("'->' to work with CNF constructor-inverter")
+    m = input("Input mode: ")
+    if m == 'n':
+        arity = int(input("Input function arity: "))
+        n = int(input("Input function number (0 -> 1): "))
+        print(f"({arity})F_{n}")
+        print_nth_function(arity, n)
+    elif m == 'v':
+        res = input("Input vector: ")
+        print("F =", res)
+        print_function(res)
+    elif m == 'xor':
+        a, b = map(int, input("Enter a and b to xor: ").split())
+        print(a ^ b)
+    elif m == "->":
+        s = input("input latex formula to invert:\n")
+        print(invert(s))
 
 
 if __name__ == "__main__":
